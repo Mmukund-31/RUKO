@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RUKO · Live call</title>
+  <link rel="stylesheet" href="/web/ruko.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <div class="wrap">
+    <!-- start -->
+    <section id="start">
+      <div class="brand" style="margin-top:24px"><span class="dot">🛡</span>RUKO</div>
+      <div class="tag">Pause. Verify. Stay safe.</div>
+      <div class="card">
+        <div style="font-weight:600;font-size:18px">Start a protected demo call</div>
+        <div class="small" style="margin-top:6px">A second device joins as the caller. RUKO listens to the caller, warns you, and you can ask RUKO privately.</div>
+        <div class="warn">🎧 Use headphones. Without them, the caller may hear RUKO through your speaker.</div>
+        <button id="startBtn" class="primary" style="margin-top:14px">Start call</button>
+        <div id="startErr" class="err hidden"></div>
+      </div>
+    </section>
+
+    <!-- waiting for caller -->
+    <section id="waiting" class="hidden center">
+      <div class="brand" style="justify-content:center;margin-top:16px"><span class="dot">🛡</span>RUKO</div>
+      <div class="card">
+        <div style="font-weight:600">Caller: scan to join</div>
+        <img id="qr" class="qr" alt="Join QR code" />
+        <div class="small">or open</div>
+        <div id="joinUrl" class="link"></div>
+        <div class="small" style="margin-top:8px">Room <b id="roomId" style="letter-spacing:3px;color:#fff"></b></div>
+        <div id="insecure" class="warn hidden">This link is not HTTPS, so a phone can't use its microphone on it. Start the HTTPS server (README → “Live call”).</div>
+      </div>
+      <div class="small" style="margin-top:12px" id="waitState">Waiting for the caller…</div>
+    </section>
+
+    <!-- live call -->
+    <section id="call" class="hidden" style="display:flex;flex-direction:column;flex:1">
+      <div class="small center">Live call · Room <span id="roomId2"></span></div>
+      <div class="avatar" id="avatar">👤</div>
+      <div class="caller-name">Unknown caller</div>
+      <div class="timer" id="timer">00:00</div>
+      <div class="chips">
+        <span class="chip amber" id="connChip"><i></i>connecting</span>
+        <span class="chip ok" id="micChip"><i></i>call mic on</span>
+        <span class="chip" id="callerChip"><i></i>caller audio <span class="meter"><div id="meter"></div></span></span>
+        <span class="chip" id="sttChip"><i></i>RUKO listening…</span>
+      </div>
+      <div id="hpWarn" class="warn hidden">🎧 No headphones detected. RUKO pauses your call mic while it speaks, but use headphones for privacy.</div>
+      <div id="risk" class="risk INSUFFICIENT_INFORMATION"><b id="riskLevel">NOT ENOUGH INFORMATION</b><span id="riskReason">RUKO is listening to the caller.</span></div>
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+      <div class="row" style="justify-content:center;margin-top:8px">
+        <select id="sink" class="hidden" aria-label="Audio output"></select>
+      </div>
+      <div class="controls">
+        <button class="cb" id="muteBtn"><span class="c">🎙</span>Mute</button>
+        <button class="cb ruko" id="rukoBtn"><span class="c">🛡</span>Ask RUKO</button>
+        <button class="cb end" id="endBtn"><span class="c">✕</span>End</button>
+      </div>
+    </section>
+
+    <!-- ended -->
+    <section id="ended" class="hidden center">
+      <div class="brand" style="justify-content:center;margin-top:24px"><span class="dot">🛡</span>RUKO</div>
+      <div class="card">
+        <div style="font-weight:600;font-size:18px">Call ended</div>
+        <div id="endRisk" class="risk" style="text-align:left"></div>
+        <button id="againBtn" class="primary" style="margin-top:14px">Start a new call</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="alert" class="alert hidden" role="alert"></div>
+
+  <!-- RUKO private assistant -->
+  <div id="sheetWrap" class="backdrop hidden">
+    <div class="sheet">
+      <div class="head">
+        <div class="brand"><span class="dot" style="color:#fff">🛡</span>RUKO</div>
+        <button class="pill" id="langBtn">Auto</button>
+        <button class="back" id="backBtn">📞 Back to call</button>
+      </div>
+      <div class="langs hidden" id="langs"></div>
+      <div class="private" id="privateNote">🔒 Private: your call mic is muted. The caller can't hear you or RUKO.</div>
+      <div class="convo" id="convo"></div>
+      <div id="sheetErr" class="err hidden"></div>
+      <button class="mic" id="micBtn" aria-label="Talk to RUKO">🎤</button>
+      <div class="status" id="status">Tap and ask RUKO</div>
+      <div class="inrow">
+        <input id="textIn" maxlength="500" placeholder="Or type your question" />
+        <button class="send" id="sendBtn" aria-label="Send">↑</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="voiceToggle" checked /> Spoken alerts</label>
+    </div>
+  </div>
+
+  <audio id="callerAudio" autoplay playsinline></audio>
+  <audio id="rukoAudio" playsinline></audio>
+  <script type="module" src="/web/user.js"></script>
+</body>
+</html>

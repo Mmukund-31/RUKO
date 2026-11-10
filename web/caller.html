@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RUKO demo · Caller</title>
+  <link rel="stylesheet" href="/web/ruko.css" />
+  <link rel="icon" href="data:," />
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand"><span class="dot">●</span> Demo caller</div>
+    <div class="small" style="margin-top:6px">You are playing the <b>caller</b> in a RUKO demonstration. Use synthetic details only.</div>
+
+    <div id="pre" class="card">
+      <div class="small">Room</div>
+      <div id="room" style="font-size:26px;font-weight:800;letter-spacing:4px"></div>
+      <button id="join" class="primary" style="margin-top:12px">Join call</button>
+      <div id="err" class="err hidden"></div>
+    </div>
+
+    <div id="call" class="hidden">
+      <div class="avatar" id="avatar">☎</div>
+      <div class="caller-name">On call with RUKO user</div>
+      <div class="timer" id="timer">00:00</div>
+      <div class="chips"><span class="chip" id="conn"><i></i>connecting</span><span class="chip ok" id="micchip"><i></i>mic on</span></div>
+      <div class="controls">
+        <button class="cb" id="mute"><span class="c">🎙</span>Mute</button>
+        <button class="cb end" id="end"><span class="c">✕</span>End</button>
+      </div>
+      <div class="card">
+        <div class="small">Demo script — read this aloud (any language)</div>
+        <div class="script">
+          <p>“Hello sir, I am calling from your bank security department. Your account has a verification problem.”</p>
+          <p>“Your account will be blocked today if you do not complete verification.”</p>
+          <p>“We have sent an OTP to your mobile. Please tell me the OTP.”</p>
+          <p class="small">Hinglish: “Main bank security department se bol raha hoon. Aapka account aaj block ho jayega. OTP bataiye.”</p>
+          <p class="small">Telugu: “నేను బ్యాంక్ సెక్యూరిటీ డిపార్ట్‌మెంట్ నుండి మాట్లాడుతున్నాను. మీ అకౌంట్ ఈ రోజే బ్లాక్ అవుతుంది. OTP చెప్పండి.”</p>
+        </div>
+      </div>
+    </div>
+    <audio id="remote" autoplay playsinline></audio>
+  </div>
+  <script type="module" src="/web/caller.js"></script>
+</body>
+</html>

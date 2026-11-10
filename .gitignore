@@ -1,0 +1,23 @@
+# secrets
+.env
+*.env
+!.env.example
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# node / expo
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+
+# local audio artefacts (live checks)
+backend/scripts/out/
+backend/.cache/
+backend/.cert/
+e2e/out/
